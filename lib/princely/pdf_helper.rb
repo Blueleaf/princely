@@ -58,7 +58,7 @@ module PdfHelper
 
   def stylesheet_file_path(stylesheet)
     stylesheet     = stylesheet.to_s.gsub(".css","")
-    stylesheet_dir = File.join(Rails.public_path, '/stylesheets')
+    stylesheet_dir = Rails.public_path
     stylesheet     = File.join(stylesheet_dir, "#{stylesheet}.css")
     transform_paths(stylesheet).path
   end
