@@ -28,6 +28,9 @@ module PdfHelper
     # Sets style sheets on PDF renderer
     prince.add_style_sheets(*options[:stylesheets].collect{|style| stylesheet_file_path(style)})
 
+    # Sets javascripts on PDF renderer
+    prince.add_javascripts(*options[:javascripts].collect{|js| js_file_path(js)})
+
     html_string = render_to_string(:template => options[:template], :layout => options[:layout])
 
     # Make all paths relative, on disk paths...
@@ -61,6 +64,12 @@ module PdfHelper
     stylesheet_dir = Rails.public_path
     stylesheet     = File.join(stylesheet_dir, "#{stylesheet}.css")
     transform_paths(stylesheet).path
+  end
+
+  def js_file_path(javascript)
+    javascript     = javascript.to_s.gsub(".css","")
+    javascript     = File.join(Rails.public_path, "#{javascript}.css")
+    transform_paths(javascript).path
   end
 
   # Make all relative paths to absolute in stylesheet fil
