@@ -20,6 +20,7 @@ module PdfHelper
 
   def make_pdf(options = {})
     options[:stylesheets] ||= []
+    options[:javascripts] ||= []
     options[:layout] ||= false
     options[:template] ||= File.join(controller_path,action_name)
     @transformed_stylesheets  = []
@@ -67,9 +68,8 @@ module PdfHelper
   end
 
   def js_file_path(javascript)
-    javascript     = javascript.to_s.gsub(".css","")
-    javascript     = File.join(Rails.public_path, "#{javascript}.css")
-    transform_paths(javascript).path
+    javascript     = javascript.to_s.gsub(".js","")
+    File.join(Rails.public_path, "#{javascript}.js")
   end
 
   # Make all relative paths to absolute in stylesheet fil
