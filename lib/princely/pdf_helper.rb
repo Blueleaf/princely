@@ -46,12 +46,6 @@ module Princely
       end
     end
 
-    def asset_file_path(asset)
-      asset = asset.to_s.gsub('.css', '')
-      File.join(config.stylesheets_dir, "#{asset}.css")
-    end
-    alias_method :stylesheet_file_path, :asset_file_path
-
     def make_and_send_pdf(pdf_name, options = {})
       options = {:disposition => 'attachment'}.merge(options)
       send_data(
